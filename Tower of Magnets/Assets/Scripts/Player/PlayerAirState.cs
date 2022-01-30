@@ -21,6 +21,8 @@ public class PlayerAirState : PlayerBaseState
     public override void UpdateState(PlayerMovement player)
     {
         grounded = player.grounded;
+        player.yVelocity = rb.velocity.y;
+        
         inputX = Input.GetAxisRaw("Horizontal");
         
         if (inputX < 0f)

@@ -9,15 +9,16 @@ public class CameraTracker : MonoBehaviour
     public int currentPosition = 3;
     private CinemachineVirtualCamera virtualCamera;
     private CinemachineTransposer transposer;
+    [SerializeField] private Ease ease;
 
-    void Start()
+    private void Start()
     {
         virtualCamera = GetComponent<CinemachineVirtualCamera>();
         transposer = virtualCamera.GetCinemachineComponent<CinemachineTransposer>();
     }
 
 
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.W) && currentPosition < 5)
         {
@@ -32,24 +33,24 @@ public class CameraTracker : MonoBehaviour
         }
     }
 
-    void SwitchState(int currentState)
+    private void SwitchState(int currentState)
     {
-        switch (currentState)
+        switch (currentState) //not the most efficient way to write this, but it works
         {
             case 1:
-                transposer.m_FollowOffset = new Vector3(0, -10, -15);
+                DOTween.To(()=> transposer.m_FollowOffset, x=> transposer.m_FollowOffset = x, new Vector3(0, -10, -15), 0.25f).SetEase(ease);
                 break;
             case 2:
-                transposer.m_FollowOffset = new Vector3(0, -5, -15);
+                DOTween.To(()=> transposer.m_FollowOffset, x=> transposer.m_FollowOffset = x, new Vector3(0, -5, -15), 0.25f).SetEase(ease);
                 break;
             case 3:
-                transposer.m_FollowOffset = new Vector3(0, 0, -15);
+                DOTween.To(()=> transposer.m_FollowOffset, x=> transposer.m_FollowOffset = x, new Vector3(0, 0, -15), 0.25f).SetEase(ease);
                 break;
             case 4:
-                transposer.m_FollowOffset = new Vector3(0, 5, -15);
+                DOTween.To(()=> transposer.m_FollowOffset, x=> transposer.m_FollowOffset = x, new Vector3(0, 5, -15), 0.25f).SetEase(ease);
                 break;
             case 5:
-                transposer.m_FollowOffset = new Vector3(0, 10, -15);
+                DOTween.To(()=> transposer.m_FollowOffset, x=> transposer.m_FollowOffset = x, new Vector3(0, 10, -15), 0.25f).SetEase(ease);
                 break;
         }
     }

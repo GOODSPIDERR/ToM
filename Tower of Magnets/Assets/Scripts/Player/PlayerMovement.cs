@@ -37,6 +37,8 @@ public class PlayerMovement : MonoBehaviour
     public PlayerStunnedState StunnedState = new PlayerStunnedState();
     public PlayerCutsceneState CutsceneState = new PlayerCutsceneState();
 
+    public PhysicsMaterial2D bouncy, sticky;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -88,7 +90,8 @@ public class PlayerMovement : MonoBehaviour
             canMove = false;
             capsuleCollider.enabled = true;
             capsuleColliderTrigger.enabled = true;
-            //boxCollider.enabled = false;
+            rb.sharedMaterial = bouncy;
+            capsuleCollider.sharedMaterial = bouncy;
         }
         else
         {
@@ -97,11 +100,11 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = Vector2.zero;
             yVelocity = 2f;
             canMove = true;
-            //transform.DOMoveY(transform.position.y + 0.5f, 0.25f);
             transform.DOLocalRotate(new Vector3(0, 0, 0), 0.25f);
-            //capsuleCollider.enabled = false;
             capsuleColliderTrigger.enabled = false;
-            //boxCollider.enabled = true;
+            rb.sharedMaterial = sticky;
+            capsuleCollider.sharedMaterial = sticky;
+            
         }
     }
 
