@@ -34,7 +34,7 @@ public class PlayerAirState : PlayerBaseState
         
         if (Input.GetKeyDown(KeyCode.E))
         {
-            player.Switch(true);
+            player.Switch(true, 99);
             player.SwitchState(player.StunnedState);
         }
 

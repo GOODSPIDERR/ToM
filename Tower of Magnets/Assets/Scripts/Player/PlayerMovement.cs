@@ -36,7 +36,10 @@ public class PlayerMovement : MonoBehaviour
     public PlayerStunnedState StunnedState = new PlayerStunnedState();
     public PlayerCutsceneState CutsceneState = new PlayerCutsceneState();
 
-    public PhysicsMaterial2D bouncy, sticky;
+    public PhysicsMaterial2D sticky;
+    public PhysicsMaterial2D bouncy1, bouncy2, bouncy3, bouncy4, bouncy5, bouncy6, bouncy7, bouncy8;
+    
+    public int bounceCounter = 9;
 
     private void Start()
     {
@@ -79,17 +82,57 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    public void Switch(bool thing)
+    public void Switch(bool thing, int strength)
     {
         if (thing)
         {
+            bounceCounter = strength;
             stunned = true;
             rb.constraints = RigidbodyConstraints2D.None;
             canMove = false;
             capsuleCollider.enabled = true;
             capsuleColliderTrigger.enabled = true;
-            rb.sharedMaterial = bouncy;
-            capsuleCollider.sharedMaterial = bouncy;
+
+            switch (strength)
+            {
+                case 8:
+                    rb.sharedMaterial = bouncy8;
+                    capsuleCollider.sharedMaterial = bouncy8;
+                    break;
+                case 7:
+                    rb.sharedMaterial = bouncy7;
+                    capsuleCollider.sharedMaterial = bouncy7;
+                    break;
+                case 6:
+                    rb.sharedMaterial = bouncy6;
+                    capsuleCollider.sharedMaterial = bouncy6;
+                    break;
+                case 5:
+                    rb.sharedMaterial = bouncy5;
+                    capsuleCollider.sharedMaterial = bouncy5;
+                    break;
+                case 4:
+                    rb.sharedMaterial = bouncy4;
+                    capsuleCollider.sharedMaterial = bouncy4;
+                    break;
+                case 3:
+                    rb.sharedMaterial = bouncy3;
+                    capsuleCollider.sharedMaterial = bouncy3;
+                    break;
+                case 2:
+                    rb.sharedMaterial = bouncy2;
+                    capsuleCollider.sharedMaterial = bouncy2;
+                    break;
+                case 1:
+                    rb.sharedMaterial = bouncy1;
+                    capsuleCollider.sharedMaterial = bouncy1;
+                    break;
+                default:
+                    rb.sharedMaterial = sticky;
+                    capsuleCollider.sharedMaterial = sticky;
+                    break;
+                
+            }
         }
         else
         {
@@ -112,6 +155,48 @@ public class PlayerMovement : MonoBehaviour
         {
             if (rb.velocity.magnitude >= 2.5f && !other.CompareTag("Forcefield"))
             {
+                
+                bounceCounter--;
+                switch (bounceCounter)
+                {
+                    case >= 8:
+                        rb.sharedMaterial = bouncy8;
+                        capsuleCollider.sharedMaterial = bouncy8;
+                        break;
+                    case 7:
+                        rb.sharedMaterial = bouncy7;
+                        capsuleCollider.sharedMaterial = bouncy7;
+                        break;
+                    case 6:
+                        rb.sharedMaterial = bouncy6;
+                        capsuleCollider.sharedMaterial = bouncy6;
+                        break;
+                    case 5:
+                        rb.sharedMaterial = bouncy5;
+                        capsuleCollider.sharedMaterial = bouncy5;
+                        break;
+                    case 4:
+                        rb.sharedMaterial = bouncy4;
+                        capsuleCollider.sharedMaterial = bouncy4;
+                        break;
+                    case 3:
+                        rb.sharedMaterial = bouncy3;
+                        capsuleCollider.sharedMaterial = bouncy3;
+                        break;
+                    case 2:
+                        rb.sharedMaterial = bouncy2;
+                        capsuleCollider.sharedMaterial = bouncy2;
+                        break;
+                    case 1:
+                        rb.sharedMaterial = bouncy1;
+                        capsuleCollider.sharedMaterial = bouncy1;
+                        break;
+                    default:
+                        rb.sharedMaterial = sticky;
+                        capsuleCollider.sharedMaterial = sticky;
+                        break;
+                }
+
                 hitSound.pitch = Random.Range(0.5f, 0.8f);
                 hitSound.Play();
                 cameraShake.Shake(rb.velocity.magnitude * 3, 2f, 0.1f);

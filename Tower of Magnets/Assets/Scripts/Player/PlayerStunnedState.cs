@@ -19,7 +19,7 @@ public class PlayerStunnedState : PlayerBaseState
             player.yVelocity = 2f;
             player.transform.DOLocalRotate(new Vector3(0, 0, 0), 0.25f);
             
-            player.Switch(false);
+            player.Switch(false, 9);
             player.SwitchState(player.AirState);
         }
         
@@ -27,6 +27,6 @@ public class PlayerStunnedState : PlayerBaseState
     }
     public override void FixedUpdateState(PlayerMovement player)
     {
-        
+        rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -30, 30), Mathf.Clamp(rb.velocity.y, -30, 30));
     }
 }
