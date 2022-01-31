@@ -21,7 +21,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     
     [SerializeField] private CapsuleCollider2D capsuleCollider, capsuleColliderTrigger;
-    private BoxCollider2D boxCollider;
 
     private AudioSource hitSound;
 
@@ -42,7 +41,6 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        boxCollider = GetComponent<BoxCollider2D>();
         hitSound = GetComponent<AudioSource>();
         initialSpriteTransform = spriteTransform.localScale.x;
         
@@ -59,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        var hit = Physics2D.BoxCast(new Vector2(transform.position.x, transform.position.y), new Vector2(1f,0.1f),
+        var hit = Physics2D.BoxCast(new Vector2(transform.position.x, transform.position.y), new Vector2(0.48f,0.1f),
             0f, Vector2.down, 0.1f, groundLayer);
         
         if (hit.collider != null && yVelocity <= 0f)
@@ -112,11 +110,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (stunned)
         {
-            if (rb.velocity.magnitude >= 1f)
+            if (rb.velocity.magnitude >= 2.5f && !other.CompareTag("Forcefield"))
             {
-                hitSound.pitch = Random.Range(0.9f, 1.1f);
+                hitSound.pitch = Random.Range(0.5f, 0.8f);
                 hitSound.Play();
-                cameraShake.Shake(rb.velocity.magnitude, 10f, 0.1f);
+                cameraShake.Shake(rb.velocity.magnitude * 3, 2f, 0.1f);
             }
         }
         

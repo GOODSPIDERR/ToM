@@ -8,6 +8,7 @@ TagManager:
   - Off
   - On
   - Environment
+  - Forcefield
   layers:
   - Default
   - TransparentFX
