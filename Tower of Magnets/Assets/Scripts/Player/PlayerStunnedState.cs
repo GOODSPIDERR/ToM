@@ -19,7 +19,7 @@ public class PlayerStunnedState : PlayerBaseState
             player.yVelocity = 2f;
             player.transform.DOLocalRotate(new Vector3(0, 0, 0), 0.25f);
             
-            player.Switch(false, 9);
+            player.Switch(false, 20);
             player.SwitchState(player.AirState);
         }
         

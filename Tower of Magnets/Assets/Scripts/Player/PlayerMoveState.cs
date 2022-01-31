@@ -41,7 +41,7 @@ public class PlayerMoveState : PlayerBaseState
         
         if (Input.GetKeyDown(KeyCode.E))
         {
-            player.Switch(true, 9);
+            player.Switch(true, 20);
             player.SwitchState(player.StunnedState);
         }
 
