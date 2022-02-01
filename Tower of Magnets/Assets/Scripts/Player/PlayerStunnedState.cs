@@ -28,5 +28,6 @@ public class PlayerStunnedState : PlayerBaseState
     public override void FixedUpdateState(PlayerMovement player)
     {
         rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -30, 30), Mathf.Clamp(rb.velocity.y, -30, 30));
+        rb.angularVelocity = Mathf.Clamp(rb.angularVelocity, -1200, 1200);
     }
 }
